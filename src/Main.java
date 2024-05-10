@@ -31,7 +31,7 @@ public class Main {
         } else if (option == 2) {
             System.out.println(CommandColors.WHITE + "Please enter your reservation number" + CommandColors.RESET);
         }
-        
+
     }
 
     public static void bookFlight(Scanner kb) {
@@ -49,7 +49,7 @@ public class Main {
                 }
             } else {
                 System.out.println(CommandColors.WHITE + "Invalid input. Please enter a number." + CommandColors.RESET);
-                kb.next(); // consume invalid input
+                kb.next(); 
             }
         }
 
