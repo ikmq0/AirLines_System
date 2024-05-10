@@ -1,13 +1,17 @@
-public class Flight extends Main {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Flight extends Main implements Serializable {
+    static ArrayList<Flight> flightArrayList = new ArrayList<>(); // This list to store all flights:
+    static ArrayList<Seat> seatArrayList;
     // Here is flights functions & seats
     private static String flightNumber;
     private static String departureCity;
     private static String arrivalCity;
     private static int gateNumber;
-    private static String[][] seatMap;
 
-    //------------------------------------------------------------------------------------------------------------------
-    // I changed r to row and c to column to make it easier to work with
+
+
     public Flight(String flightNumber, String departureCity, String arrivalCity, int gateNumber, int row, int column) {
 
         this.flightNumber = flightNumber;
