@@ -1,24 +1,19 @@
-public class Flights {
+public class Flight extends Main {
     // Here is flights functions & seats
-    public String flightNumber;
-    public String departureCity;
-    public String arrivalCity;
-    public int gateNumber;
-    public String[][] seatMap;
-    public int row;
-    public int column;
+    private static String flightNumber;
+    private static String departureCity;
+    private static String arrivalCity;
+    private static int gateNumber;
+    private static String[][] seatMap;
 
     //------------------------------------------------------------------------------------------------------------------
     // I changed r to row and c to column to make it easier to work with
-    public Flights(String flightNumber, String departureCity, String arrivalCity, int gateNumber, int row, int column) {
+    public Flight(String flightNumber, String departureCity, String arrivalCity, int gateNumber, int row, int column) {
 
         this.flightNumber = flightNumber;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
         this.gateNumber = gateNumber;
-        this.seatMap = new String[row][column];
-        this.row = row;
-        this.column = column;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -42,7 +37,7 @@ public class Flights {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public String[][] getSeatMap() {
+    public static String[][] getSeatMap() {
         return seatMap;
     }
 
@@ -83,22 +78,38 @@ public class Flights {
         return false;
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    // This method will check if the seat available
-    public boolean isSeatAvailable(int row, char column) {
-
-        // We changed char to int, so we can use it in the index
-        int columnIndex = column - 'A';
-
-        return row >= 0 && row < getSeatMap().length
-                && columnIndex >= 0 && columnIndex < getSeatMap()[row].length
-                && getSeatMap()[row][columnIndex] == null;
-    }
-
-    //------------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Flight{" + "flightNumber=" + flightNumber + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity + ", gateNumber=" + gateNumber + ", row=" + row + ", column=" + column + '}';
+    }
+
+    public static class Seat{
+        public int row;
+        public int column;
+        public boolean available;
+
+        public Seat(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
+
+        public Seat() {
+        }
+
+        //------------------------------------------------------------------------------------------------------------------
+        // This method will check if the seat available
+        public boolean isSeatAvailable(int row, char column) {
+
+            // We changed char to int, so we can use it in the index
+            int columnIndex = column - 'A';
+
+            return row >= 0 && row < getSeatMap().length
+                    && columnIndex >= 0 && columnIndex < getSeatMap()[row].length
+                    && getSeatMap()[row][columnIndex] == null;
+        }
+
+        //------------------------------------------------------------------------------------------------------------------
+
     }
 
 }
