@@ -1,12 +1,12 @@
 public class Flights {
     // Here is flights functions & seats
-    private String flightNumber;
-    private String departureCity;
-    private String arrivalCity;
-    private int gateNumber;
-    private String[][] seatMap;
-    private int row;
-    private int column;
+    public String flightNumber;
+    public String departureCity;
+    public String arrivalCity;
+    public int gateNumber;
+    public String[][] seatMap;
+    public int row;
+    public int column;
 
     //------------------------------------------------------------------------------------------------------------------
     // I changed r to row and c to column to make it easier to work with
