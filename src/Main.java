@@ -25,11 +25,13 @@ public class Main {
                 kb.next();
             }
         }
-        if (option==1){
+        int departureOption= kb.nextInt();
+
+        if (departureOption==1){
             System.out.println(CommandColors.WHITE+ "Enter Departure City "+ CommandColors.RESET);
             System.out.println(CommandColors.WHITE+ " (1) Riyad(RUD) \n (2) Dammam(DMM) \n (3) Jeddah(JDD) \n (4) Madina(MED)"+ CommandColors.RESET);
 
-        } else if (option==2) {
+        } else if (departureOption == 2) {
             System.out.println(CommandColors.WHITE + "Please enter your reservation number"+CommandColors.RESET);
         }else{
             System.out.println(CommandColors.WHITE+ "Invalid input. Please enter a valid option" + CommandColors.RESET);
