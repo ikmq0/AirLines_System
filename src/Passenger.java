@@ -1,11 +1,11 @@
-public class Users {
-    // Users Functions
+public class Passenger {
+    // Passenger Functions
 
     private String passportNumber;
     private String name;
 
     //------------------------------------------------------------------------------------------------------------------
-    Users(String passportNumber, String name) {
+    Passenger(String passportNumber, String name) {
         this.passportNumber = passportNumber;
         this.name = name;
     }
