@@ -9,19 +9,19 @@ public class Main {
 
         int option = 0;
         while (true) {
-            System.out.println(CommandColors.BLUE + "1. Book Now" + CommandColors.RESET);
-            System.out.println(CommandColors.BLUE + "2. Display Booking" + CommandColors.RESET);
-            System.out.println(CommandColors.BLUE + "Select an option: " + CommandColors.RESET);
+            System.out.println(CommandColors.WHITE + "1. Book Now" + CommandColors.RESET);
+            System.out.println(CommandColors.WHITE + "2. Display Booking" + CommandColors.RESET);
+            System.out.println(CommandColors.WHITE + "Select an option: " + CommandColors.RESET);
 
             if (kb.hasNextInt()) {
                 option = kb.nextInt();
                 if (option == 1 || option == 2) {
                     break;
                 } else {
-                    System.out.println(CommandColors.BLUE + "Invalid option. Please enter 1 or 2." + CommandColors.RESET);
+                    System.out.println(CommandColors.RED + "Invalid option. Please enter 1 or 2." + CommandColors.RESET);
                 }
             } else {
-                System.out.println(CommandColors.BLUE + "Invalid input. Please enter a number." + CommandColors.RESET);
+                System.out.println(CommandColors.RED + "Invalid input. Please enter a number." + CommandColors.RESET);
                 kb.next();
             }
         }
@@ -38,7 +38,7 @@ public class Main {
         int departureOption = 0;
         while (true) {
             System.out.println(CommandColors.WHITE + "Enter Departure City " + CommandColors.RESET);
-            System.out.println(CommandColors.WHITE + " (1) Riyadh(RUD) \n (2) Dammam(DMM) \n (3) Jeddah(JDD) \n (4) Madina(MED)" + CommandColors.RESET);
+            System.out.println(CommandColors.WHITE + " 1. Riyadh(RUD) \n 2. Dammam(DMM) \n 3. Jeddah(JDD) \n 4. Madina(MED)" + CommandColors.RESET);
 
             if (kb.hasNextInt()) {
                 departureOption = kb.nextInt();
@@ -54,17 +54,17 @@ public class Main {
         }
 
         if (departureOption == 1) {
-            System.out.println(CommandColors.WHITE + "Enter Arrival City " + CommandColors.RESET);
-            System.out.println(CommandColors.WHITE + " (2) Dammam(DMM) \n (3) Jeddah(JDD) \n (4) Madina(MED)" + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + "Enter Arrival City " + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + " 2. Dammam(DMM) \n 3. Jeddah(JDD) \n 4. Madina(MED)" + CommandColors.RESET);
         } else if (departureOption == 2) {
-            System.out.println(CommandColors.WHITE + "Enter Arrival City " + CommandColors.RESET);
-            System.out.println(CommandColors.WHITE + " (1) Riyadh(RUD) \n (3) Jeddah(JDD) \n (4) Madina(MED)" + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + "Enter Arrival City " + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + " 1. Riyadh(RUD) \n 3. Jeddah(JDD) \n 4. Madina(MED)" + CommandColors.RESET);
         } else if (departureOption == 3) {
-            System.out.println(CommandColors.WHITE + "Enter Arrival City " + CommandColors.RESET);
-            System.out.println(CommandColors.WHITE + " (1) Riyadh(RUD) \n (2) Dammam(DMM) \n (4) Madina(MED)" + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + "Enter Arrival City " + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + " 1. Riyadh(RUD) \n 2. Dammam(DMM) \n 4. Madina(MED)" + CommandColors.RESET);
         } else if (departureOption == 4) {
-            System.out.println(CommandColors.WHITE + "Enter Arrival City " + CommandColors.RESET);
-            System.out.println(CommandColors.WHITE + " (1) Riyadh(RUD) \n (2) Dammam(DMM) \n (3) Jeddah(JDD)" + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + "Enter Arrival City " + CommandColors.RESET);
+            System.out.println(CommandColors.CYAN + " 1. Riyadh(RUD) \n 2. Dammam(DMM) \n 3. Jeddah(JDD)" + CommandColors.RESET);
         }
         int arrivalOption = 0;
         while (true) {
@@ -76,11 +76,11 @@ public class Main {
                         (departureOption == 4 && (arrivalOption == 1 || arrivalOption == 2 || arrivalOption == 3))) {
                     break;
                 } else {
-                    System.out.println(CommandColors.WHITE + "Invalid option. Please enter a valid arrival city." + CommandColors.RESET);
+                    System.out.println(CommandColors.CYAN + "Invalid option. Please enter a valid arrival city." + CommandColors.RESET);
                 }
             } else {
-                System.out.println(CommandColors.WHITE + "Invalid input. Please enter a number." + CommandColors.RESET);
-                kb.next(); // consume invalid input
+                System.out.println(CommandColors.CYAN + "Invalid input. Please enter a number." + CommandColors.RESET);
+                kb.next();
             }
         }
     }
