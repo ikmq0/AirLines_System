@@ -10,7 +10,7 @@ public class Flights {
 
     //------------------------------------------------------------------------------------------------------------------
     // I changed r to row and c to column to make it easier to work with
-    public Flight(String flightNumber, String departureCity, String arrivalCity, int gateNumber, int row, int column) {
+    public Flights(String flightNumber, String departureCity, String arrivalCity, int gateNumber, int row, int column) {
 
         this.flightNumber = flightNumber;
         this.departureCity = departureCity;
