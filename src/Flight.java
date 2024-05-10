@@ -2,26 +2,41 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Flight extends Main implements Serializable {
-    static ArrayList<Flight> flightArrayList = new ArrayList<>(); // This list to store all flights:
-    static ArrayList<Seat> seatArrayList;
+    public static ArrayList<Flight> flightsArrayList = new ArrayList<>(); // This list to store all flights:
+    private static ArrayList<Seat> seatsArrayList; // This will be an array to store seats for each flight
     // Here is flights functions & seats
-    private static String flightNumber;
+    private static int flightNumber;
     private static String departureCity;
     private static String arrivalCity;
     private static int gateNumber;
 
 
 
-    public Flight(String flightNumber, String departureCity, String arrivalCity, int gateNumber, int row, int column) {
+    public Flight(int flightNumber, String departureCity, String arrivalCity, int gateNumber) {
 
         this.flightNumber = flightNumber;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
         this.gateNumber = gateNumber;
+        this.seatsArrayList = createSeatsForFlight();
+    }
+
+    public static void createNewFlight(int flightNumber, String departureCity, String arrivalCity, int gateNumber){
+        flightsArrayList.add(new Flight(flightNumber,departureCity,arrivalCity,gateNumber)) ;
+    }
+
+    public ArrayList<Seat> createSeatsForFlight(){
+        ArrayList<Seat> seats = new ArrayList<>();
+        for(int i =1; i <=4; i++){
+            for (int j = 1; j<= 6; j++) {
+                seats.add(new Seat(i,j));
+            }
+        }
+        return seats;
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public String getFlightNumber() {
+    public int getFlightNumber() {
         return flightNumber;
     }
 
@@ -41,9 +56,7 @@ public class Flight extends Main implements Serializable {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public static String[][] getSeatMap() {
-        return seatMap;
-    }
+
 
     //------------------------------------------------------------------------------------------------------------------
     public void setDepartureCity(String departureCity) {
@@ -56,7 +69,7 @@ public class Flight extends Main implements Serializable {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    public void setFlightNumber(String flightNumber) {
+    public void setFlightNumber(int flightNumber) {
         this.flightNumber = flightNumber;
     }
 
@@ -67,24 +80,10 @@ public class Flight extends Main implements Serializable {
 
     //------------------------------------------------------------------------------------------------------------------
     // This method will add the booked seat to the seatMap
-    public boolean bookSeat(int row, char column, String passengerID) {
-
-        // Just to match the output row
-        int adjustedRow = row - 1;
-
-        // Convert char to integer to work with it
-        int columnIdx = column - 'A';
-
-        if (isSeatAvailable(adjustedRow, column)) {
-            getSeatMap()[adjustedRow][columnIdx] = passengerID;
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public String toString() {
-        return "Flight{" + "flightNumber=" + flightNumber + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity + ", gateNumber=" + gateNumber + ", row=" + row + ", column=" + column + '}';
+        return "Flight{" + "flightNumber=" + flightNumber + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity + ", gateNumber=" + gateNumber + ", SeatsList" + seatsArrayList +'}';
     }
 
     public static class Seat{
@@ -95,25 +94,24 @@ public class Flight extends Main implements Serializable {
         public Seat(int row, int column) {
             this.row = row;
             this.column = column;
+            this.available = true;
         }
 
-        public Seat() {
+        @Override
+        public String toString() {
+            return "Seat{" +row + column+
+                    ", available=" + available +
+                    '}';
         }
 
         //------------------------------------------------------------------------------------------------------------------
         // This method will check if the seat available
-        public boolean isSeatAvailable(int row, char column) {
 
-            // We changed char to int, so we can use it in the index
-            int columnIndex = column - 'A';
+    }
 
-            return row >= 0 && row < getSeatMap().length
-                    && columnIndex >= 0 && columnIndex < getSeatMap()[row].length
-                    && getSeatMap()[row][columnIndex] == null;
-        }
-
-        //------------------------------------------------------------------------------------------------------------------
-
+    public static void main(String[] args) {
+        createNewFlight(1,"DMM","JED",1);
+        System.out.println(flightsArrayList);
     }
 
 }
