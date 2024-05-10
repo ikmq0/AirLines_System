@@ -66,7 +66,7 @@ public class Main {
             System.out.println(CommandColors.WHITE + "Enter Arrival City " + CommandColors.RESET);
             System.out.println(CommandColors.WHITE + " 1. Riyadh(RUD) \n 2. Dammam(DMM) \n 3. Jeddah(JDD)" + CommandColors.RESET);
         }
-        int arrivalOption = 0;
+        int arrivalOption =0;
         while (true) {
             if (kb.hasNextInt()) {
                 arrivalOption = kb.nextInt();
