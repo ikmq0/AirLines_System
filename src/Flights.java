@@ -87,7 +87,7 @@ public class Flights {
     // This method will check if the seat available
     public boolean isSeatAvailable(int row, char column) {
 
-        // We changed char to int so we can use it in the index
+        // We changed char to int, so we can use it in the index
         int columnIndex = column - 'A';
 
         return row >= 0 && row < getSeatMap().length
