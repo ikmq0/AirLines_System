@@ -49,7 +49,7 @@ public class Main {
                 }
             } else {
                 System.out.println(CommandColors.WHITE + "Invalid input. Please enter a number." + CommandColors.RESET);
-                kb.next(); 
+                kb.next();
             }
         }
 
@@ -65,6 +65,23 @@ public class Main {
         } else if (departureOption == 4) {
             System.out.println(CommandColors.WHITE + "Enter Arrival City " + CommandColors.RESET);
             System.out.println(CommandColors.WHITE + " (1) Riyadh(RUD) \n (2) Dammam(DMM) \n (3) Jeddah(JDD)" + CommandColors.RESET);
+        }
+        int arrivalOption = 0;
+        while (true) {
+            if (kb.hasNextInt()) {
+                arrivalOption = kb.nextInt();
+                if ((departureOption == 1 && arrivalOption >= 2 && arrivalOption <= 4) ||
+                        (departureOption == 2 && (arrivalOption == 1 || arrivalOption == 3 || arrivalOption == 4)) ||
+                        (departureOption == 3 && (arrivalOption == 1 || arrivalOption == 2 || arrivalOption == 4)) ||
+                        (departureOption == 4 && (arrivalOption == 1 || arrivalOption == 2 || arrivalOption == 3))) {
+                    break;
+                } else {
+                    System.out.println(CommandColors.WHITE + "Invalid option. Please enter a valid arrival city." + CommandColors.RESET);
+                }
+            } else {
+                System.out.println(CommandColors.WHITE + "Invalid input. Please enter a number." + CommandColors.RESET);
+                kb.next(); // consume invalid input
+            }
         }
     }
 }
