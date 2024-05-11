@@ -89,7 +89,7 @@ public class Flights extends Main {
 
         @Override
         public String toString() {
-            return "Flight{" + "flightNumber=" + flightNumber + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity + ", gateNumber=" + gateNumber + ", SeatsList" + seatsArrayList +'}';
+            return "Flight{" + "flightNumber=" + flightNumber + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity + ", gateNumber=" + gateNumber + ", SeatsList " + seatsArrayList +'}';
         }
 
         public static class Seat{
