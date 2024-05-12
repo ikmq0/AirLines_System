@@ -1,6 +1,7 @@
 public class Ticket {
     private String passengerFirstName;
     private String passengerLastName;
+    private int passengerAge;
     private String passportNumber;
     private Flights.Flight flight;
     private Flights.Flight.Seat seat;
@@ -41,7 +42,25 @@ public class Ticket {
         return seat;
     }
 
+    public int getPassengerAge() {
+        return passengerAge;
+    }
+
+    public void setPassengerAge(int passengerAge) {
+        this.passengerAge = passengerAge;
+    }
+
     public void setSeat(Flights.Flight.Seat seat) {
+        this.seat = seat;
+    }
+
+
+    public Ticket(String passengerFirstName, String passengerLastName, int passengerAge, String passportNumber, Flights.Flight flight, Flights.Flight.Seat seat) {
+        this.passengerFirstName = passengerFirstName;
+        this.passengerLastName = passengerLastName;
+        this.passengerAge = passengerAge;
+        this.passportNumber = passportNumber;
+        this.flight = flight;
         this.seat = seat;
     }
 

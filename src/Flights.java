@@ -1,6 +1,4 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Objects;
 import java.util.Date;
 
@@ -8,7 +6,7 @@ public class Flights extends Main {
     public static ArrayList<Flight> flightsArrayList = new ArrayList<>(); // This list to store all flights:
 
     public static class Flight extends Flights {
-        private ArrayList<Seat> seatsArrayList; // This will be an array to store seats for each flight
+        ArrayList<Seat> seatsArrayList; // This will be an array to store seats for each flight
         private int flightNumber;
         private String departureCity;
         private Date departureDate_Time;
@@ -113,9 +111,9 @@ public class Flights extends Main {
         }
 
         public static class Seat{
-            public int row;
-            public char column;
-            public boolean available;
+            private int row;
+            private char column;
+            private boolean available;
 
             public Seat(char column, int row) {
                 this.column = column;
@@ -132,6 +130,26 @@ public class Flights extends Main {
 
             public void setAvailable(boolean available) {
                 this.available = available;
+            }
+
+            public void setRow(int row) {
+                this.row = row;
+            }
+
+            public void setColumn(char column) {
+                this.column = column;
+            }
+
+            public int getRow() {
+                return row;
+            }
+
+            public char getColumn() {
+                return column;
+            }
+
+            public boolean isAvailable() {
+                return available;
             }
 
             //------------------------------------------------------------------------------------------------------------------
@@ -156,13 +174,15 @@ public class Flights extends Main {
 
     public static void printSeatsMap(Flight inputtedFlight) {
         char [] charsList = {'A','B','C','D'};
-        System.out.printf("%10s %10s %10s %10s \n",'A','B','C','D');
+        System.out.printf("%10s %7s %10s %7s \n",'A','B','C','D');
         for (int i = 1; i<=6;i++) {
             for (char c : charsList) {
-                if(isSeatAvailable(c,i,inputtedFlight)) {
-                    System.out.printf("%10s%s", c, i );
+                if(Objects.requireNonNull(SearchForSeatByColumn(c, i, inputtedFlight)).isAvailable()) {
+                    if (c == 'A' || c=='C'){
+                        System.out.printf("%10s%s", c, i );
+                    } else {System.out.printf("%7s%s", c, i );}
                 } else {
-                    System.out.printf("%10s","NA");
+                    System.out.printf("%10s%s","N","A");
                 }
             }
             System.out.println();
@@ -171,12 +191,12 @@ public class Flights extends Main {
 
     }
 
-    public static boolean isSeatAvailable(char c,int r,Flight inputtedFlight) {
+    public static Flight.Seat SearchForSeatByColumn(char c, int r, Flight inputtedFlight) {
         ArrayList<Flight.Seat> seatsList = inputtedFlight.getSeatsArrayList();
         for (Flight.Seat seat: seatsList) {
-            if (seat.column == c && seat.row == r && seat.available) return true;
+            if (seat.column == c && seat.row == r) return seat;
         }
-        return false;
+        return null;
     }
     public static Flight searchByFlightNumber(int flightNumber,ArrayList<Flight> flightsList) {
         for (Flight flight: flightsList) {
@@ -229,8 +249,16 @@ public class Flights extends Main {
 
     }
 
-
-
-
+    public static void makeSeatUnavailable(char column,int row, int flightNumber){
+        for (Flight flight: flightsArrayList) {
+            if (flight.flightNumber == flightNumber) {
+                for (Flight.Seat seat: flight.seatsArrayList) {
+                    if (seat.column == column && seat.row == row) {
+                        seat.setAvailable(false);
+                    };
+                }
+            }
+        }
+    }
 
 }

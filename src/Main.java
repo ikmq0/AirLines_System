@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 public class Main {
     // We should start our program from here
@@ -6,37 +8,40 @@ public class Main {
         Flights.initializeFlights();
         Scanner kb = new Scanner(System.in);
 
-        System.out.println(CommandColors.GREEN + "Welcome to AirLINE Reservation System " + CommandColors.RESET);
+        System.out.println(CommandColors.GREEN + "Welcome to AirLINE Reservations System " + CommandColors.RESET);
         System.out.println(CommandColors.GREEN + "Lets Book a flight together!! " + CommandColors.RESET);
-
-        int option = 0;
         while (true) {
-            System.out.println(CommandColors.WHITE + "1. Book Now" + CommandColors.RESET);
-            System.out.println(CommandColors.WHITE + "2. Display Booking" + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + "Select an option: " + CommandColors.RESET);
+            int option = 0;
+            while (true) {
+                System.out.println(CommandColors.WHITE + "\n1. Book Now" + CommandColors.RESET);
+                System.out.println(CommandColors.WHITE + "2. Display Booking" + CommandColors.RESET);
+                System.out.print(CommandColors.WHITE + "Select an option: " + CommandColors.RESET);
 
-            if (kb.hasNextInt()) {
-                option = kb.nextInt();
-                if (option == 1 || option == 2) {
-                    break;
+                if (kb.hasNextInt()) {
+                    option = kb.nextInt();
+                    if (option == 1 || option == 2) {
+                        break;
+                    } else {
+                        System.out.println(CommandColors.RED + "Invalid option. Please enter 1 or 2." + CommandColors.RESET);
+                    }
                 } else {
-                    System.out.println(CommandColors.RED + "Invalid option. Please enter 1 or 2." + CommandColors.RESET);
+                    System.out.println(CommandColors.RED + "Invalid input. Please enter a number: " + CommandColors.RESET);
+                    kb.next();
                 }
+            }
+
+            if (option == 1) {
+                bookFlight(kb);
             } else {
-                System.out.println(CommandColors.RED + "Invalid input. Please enter a number." + CommandColors.RESET);
-                kb.next();
+                displayBooking(kb);
             }
         }
 
-        if (option == 1) {
-            bookFlight(kb);
-        } else {
-            displayBooking(kb);
-        }
 
     }
 
     public static void bookFlight(Scanner kb) {
+        Reservations.Reservation currentReservation = Reservations.createNewReservation();
         int departureOption = 0;
         String departureCity = null;
         while (true) {
@@ -58,19 +63,19 @@ public class Main {
 
         if (departureOption == 1) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 2. Dammam(DMM) \n 3. Jeddah(JED) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 2. Dammam(DMM) \n 3. Jeddah(JED) \n 4. Madina(MED)\nSelect an option: " + CommandColors.RESET);
             departureCity = "RUH";
         } else if (departureOption == 2) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 3. Jeddah(JED) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 3. Jeddah(JED) \n 4. Madina(MED)\nSelect an option: " + CommandColors.RESET);
             departureCity = "DMM";
         } else if (departureOption == 3) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 2. Dammam(DMM) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 2. Dammam(DMM) \n 4. Madina(MED)\nSelect an option: " + CommandColors.RESET);
             departureCity = "JED";
         } else if (departureOption == 4) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 2. Dammam(DMM) \n 3. Jeddah(JED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 2. Dammam(DMM) \n 3. Jeddah(JED)\nSelect an option: " + CommandColors.RESET);
             departureCity = "MED";
         }
         int arrivalOption =0;
@@ -123,9 +128,10 @@ public class Main {
             }
         }
 
-        for (int i = 1;i < numberOfPassenger;i++){
+        for (int i = 1;i <= numberOfPassenger;i++){
             System.out.printf("Passenger %s First Name: ",i);
             String passengerFName = kb.next();
+            kb.nextLine();
             System.out.printf("Passenger %s Last Name: ",i);
             String passengerLName = kb.nextLine();
             int passengerAge;
@@ -135,15 +141,64 @@ public class Main {
                 if (passengerAge >=18 && passengerAge < 90) {
                     break;
                 } else {
-                    System.out.print("Invalid input");
+                    System.out.println(CommandColors.RED + "Invalid input. ensure that age between 18 and 90" + CommandColors.RESET);
                 }
             }
+            System.out.printf("Passenger %s Passport Number: ",i);
+            String passengerPass = kb.next();
+
+
+            Flights.printSeatsMap(selectedFlight);
+            String selectedSeat;
+            Flights.Flight.Seat classSeat;
+            while (true){
+                System.out.print("Select your seat: ");
+                selectedSeat = kb.next();
+                char column = selectedSeat.charAt(0);
+                int row = Integer.parseInt(selectedSeat.substring(1));
+                classSeat = Flights.SearchForSeatByColumn(column,row,selectedFlight);
+                if(classSeat.isAvailable()) {
+                     Flights.makeSeatUnavailable(column,row,selectedFlight.getFlightNumber());
+                     break;
+                } else {
+                    System.out.println(CommandColors.RED + "Invalid input. Enter available seat" + CommandColors.RESET);
+                }
+
+            }
+
+            currentReservation.ticketsList.add(new Ticket(passengerFName,passengerLName,passengerAge,passengerPass,selectedFlight,classSeat));
+
         }
+        System.out.println(CommandColors.GREEN +"\nThanks for using our AirLines System!" + CommandColors.RESET);
+        System.out.printf(CommandColors.GREEN + "Your Reservation Number:"+ CommandColors.BLUE +" %10s" + CommandColors.RESET,currentReservation.getReservationNumber());
+
 
 
     }
 
     public static void displayBooking(Scanner kb) {
+        System.out.print("Enter your reservation Number: ");
+        if(kb.hasNextLong()) {
+            long reservationNumber = kb.nextLong();
+            Reservations.Reservation reservation = Reservations.SearchForReservation(reservationNumber);
+            if (reservation != null) {
+                System.out.printf(CommandColors.GREEN + "Your Reservation Number:"+ CommandColors.BLUE +" %10s\n" + CommandColors.RESET,reservation.getReservationNumber());
+                for (int i = 1; i <= reservation.getTicketsList().size();i++) {
+                    Ticket ticket = reservation.getTicketsList().get(i-1);
+                    System.out.printf("\nPassenger %s: \n",i);
+                    System.out.printf("Name: %-5s\n",ticket.getPassengerLastName() +", " +ticket.getPassengerFirstName());
+                    System.out.printf("Age: %-5s\n",ticket.getPassengerAge());
+                    System.out.printf("Passport Number: %-5s\n",ticket.getPassportNumber());
+                    System.out.printf("Flight Number: %-5s\n",ticket.getFlight().getFlightNumber());
+                    System.out.printf("Gate Number: %-5s\n",ticket.getFlight().getGateNumber());
+                    System.out.printf("Seat: %-5s\n",ticket.getSeat().getColumn()+ticket.getSeat().getRow());
+                }
 
+            } else {
+                System.out.println(CommandColors.RED + " We couldn't find a reservation with that reference" + CommandColors.RESET);
+            }
+        } else {
+            System.out.println(CommandColors.RED + "Invalid input. Please enter a valid number" + CommandColors.RESET);
+        }
     }
 }
