@@ -62,15 +62,15 @@ public class Main {
             departureCity = "RUH";
         } else if (departureOption == 2) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUD) \n 3. Jeddah(JED) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 3. Jeddah(JED) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
             departureCity = "DMM";
         } else if (departureOption == 3) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUD) \n 2. Dammam(DMM) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 2. Dammam(DMM) \n 4. Madina(MED)\nSelect an option:" + CommandColors.RESET);
             departureCity = "JED";
         } else if (departureOption == 4) {
             System.out.println(CommandColors.WHITE + "\nEnter Arrival City " + CommandColors.RESET);
-            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUD) \n 2. Dammam(DMM) \n 3. Jeddah(JED)\nSelect an option:" + CommandColors.RESET);
+            System.out.print(CommandColors.WHITE + " 1. Riyadh(RUH) \n 2. Dammam(DMM) \n 3. Jeddah(JED)\nSelect an option:" + CommandColors.RESET);
             departureCity = "MED";
         }
         int arrivalOption =0;
@@ -112,12 +112,38 @@ public class Main {
             break;
 
         }
+        int numberOfPassenger;
+        while (true) {
+            System.out.print("Enter the number of passengers (0< ): ");
+            numberOfPassenger = kb.nextInt();
+            if(numberOfPassenger > 0 && numberOfPassenger <= 20) {
+                break;
+            } else {
+                System.out.println(CommandColors.RED + "Invalid input, make sure it's between 1 and 20" + CommandColors.RESET);
+            }
+        }
 
+        for (int i = 1;i < numberOfPassenger;i++){
+            System.out.printf("Passenger %s First Name: ",i);
+            String passengerFName = kb.next();
+            System.out.printf("Passenger %s Last Name: ",i);
+            String passengerLName = kb.nextLine();
+            int passengerAge;
+            while(true){
+                System.out.printf("Passenger %s Age: ",i);
+                passengerAge = kb.nextInt();
+                if (passengerAge >=18 && passengerAge < 90) {
+                    break;
+                } else {
+                    System.out.print("Invalid input");
+                }
+            }
+        }
 
 
     }
 
     public static void displayBooking(Scanner kb) {
-        
+
     }
 }

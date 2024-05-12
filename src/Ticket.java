@@ -1,52 +1,58 @@
 public class Ticket {
-    private Passenger passenger;
+    private String passengerFirstName;
+    private String passengerLastName;
+    private String passportNumber;
     private Flights.Flight flight;
     private Flights.Flight.Seat seat;
 
-    public Passenger getPassenger() {
-        return passenger;
+    public String getPassengerFirstName() {
+        return passengerFirstName;
+    }
+
+    public void setPassengerFirstName(String passengerFirstName) {
+        this.passengerFirstName = passengerFirstName;
+    }
+
+    public String getPassengerLastName() {
+        return passengerLastName;
+    }
+
+    public void setPassengerLastName(String passengerLastName) {
+        this.passengerLastName = passengerLastName;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     public Flights.Flight getFlight() {
         return flight;
     }
 
-    public Flights.Flight.Seat getSeat() {
-        return seat;
-    }
-
-    public int getSeatRow() {
-        return seat.row;
-    }
-
-    public char getSeatColumn() {
-        return seat.column;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
-
     public void setFlight(Flights.Flight flight) {
         this.flight = flight;
+    }
+
+    public Flights.Flight.Seat getSeat() {
+        return seat;
     }
 
     public void setSeat(Flights.Flight.Seat seat) {
         this.seat = seat;
     }
 
-    public void setSeatRow(int seatRow) {
-        this.seat.row = seatRow;
-    }
-
-    public void setSeatColumn(char seatColumn) {
-        this.seat.column = seatColumn;
-    }
-    // khaled please check here and tell me if the seat number and row can be accessed from the seat class in flight class
-    public String toString(){
-        return "Ticket to flight "+ flight.getFlightNumber() +
-                "Passenger name is: " + passenger.getName() +
-                "with Passport number: " + passenger.getPassportNumber() +
-                "Seat row: " + seat.row + "Seat col: " + seat.column;
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "passengerFirstName='" + passengerFirstName + '\'' +
+                ", passengerLastName='" + passengerLastName + '\'' +
+                ", passportNumber='" + passportNumber + '\'' +
+                ", flight=" + flight +
+                ", seat=" + seat +
+                '}';
     }
 }
