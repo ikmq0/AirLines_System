@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public  class Reservations extends Main {
+public class Reservations extends Main {
     public static ArrayList<Reservation> reservationArrayList = new ArrayList<>();
     static Random random = new Random();
 
@@ -16,21 +16,12 @@ public  class Reservations extends Main {
 
         public Reservation() {
         }
-
         public ArrayList<Ticket> getTicketsList() {
             return ticketsList;
         }
 
-        public void setTicketsList(ArrayList<Ticket> ticketsList) {
-            this.ticketsList = ticketsList;
-        }
-
         public long getReservationNumber() {
             return reservationNumber;
-        }
-
-        public void setReservationNumber(long reservationNumber) {
-            this.reservationNumber = reservationNumber;
         }
 
         @Override
@@ -45,7 +36,7 @@ public  class Reservations extends Main {
 
     public static Reservation createNewReservation(){
         long generatedNumber =random.nextLong(1000,9999);
-        while(SearchForReservation(generatedNumber) == null) {
+        while(SearchForReservation(generatedNumber) != null) {
             generatedNumber =random.nextLong(1000,9999);
         }
 

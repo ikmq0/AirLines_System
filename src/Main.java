@@ -8,9 +8,10 @@ public class Main {
         Flights.initializeFlights();
         Scanner kb = new Scanner(System.in);
 
-        System.out.println(CommandColors.GREEN + "Welcome to AirLINE Reservations System " + CommandColors.RESET);
-        System.out.println(CommandColors.GREEN + "Lets Book a flight together!! " + CommandColors.RESET);
+
         while (true) {
+            System.out.println(CommandColors.GREEN + "Welcome to AirLINE Reservations System " + CommandColors.RESET);
+            System.out.println(CommandColors.GREEN + "Lets Book a flight together!! " + CommandColors.RESET);
             int option = 0;
             while (true) {
                 System.out.println(CommandColors.WHITE + "\n1. Book Now" + CommandColors.RESET);
@@ -41,7 +42,6 @@ public class Main {
     }
 
     public static void bookFlight(Scanner kb) {
-        Reservations.Reservation currentReservation = Reservations.createNewReservation();
         int departureOption = 0;
         String departureCity = null;
         while (true) {
@@ -127,6 +127,7 @@ public class Main {
                 System.out.println(CommandColors.RED + "Invalid input, make sure it's between 1 and 20" + CommandColors.RESET);
             }
         }
+        Reservations.Reservation currentReservation = Reservations.createNewReservation();
 
         for (int i = 1;i <= numberOfPassenger;i++){
             System.out.printf("Passenger %s First Name: ",i);
@@ -169,6 +170,7 @@ public class Main {
             currentReservation.ticketsList.add(new Ticket(passengerFName,passengerLName,passengerAge,passengerPass,selectedFlight,classSeat));
 
         }
+        Reservations.reservationArrayList.add(currentReservation);
         System.out.println(CommandColors.GREEN +"\nThanks for using our AirLines System!" + CommandColors.RESET);
         System.out.printf(CommandColors.GREEN + "Your Reservation Number:"+ CommandColors.BLUE +" %10s" + CommandColors.RESET,currentReservation.getReservationNumber());
 
