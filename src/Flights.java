@@ -59,7 +59,6 @@ public class Flights extends Main {
 
         //------------------------------------------------------------------------------------------------------------------
 
-
         public ArrayList<Seat> getSeatsArrayList() {
             return this.seatsArrayList;
         }
@@ -82,6 +81,22 @@ public class Flights extends Main {
         //----------------------------------------------------------------------------------------------------------------
         public void setGateNumber(int gateNumber) {
             this.gateNumber = gateNumber;
+        }
+
+        public Date getDepartureDate_Time() {
+            return departureDate_Time;
+        }
+
+        public Date getArrivalDate_Time() {
+            return arrivalDate_Time;
+        }
+
+        public void setDepartureDate_Time(Date departureDate_Time) {
+            this.departureDate_Time = departureDate_Time;
+        }
+
+        public void setArrivalDate_Time(Date arrivalDate_Time) {
+            this.arrivalDate_Time = arrivalDate_Time;
         }
 
         @Override
@@ -144,7 +159,7 @@ public class Flights extends Main {
         System.out.printf("%10s %10s %10s %10s \n",'A','B','C','D');
         for (int i = 1; i<=6;i++) {
             for (char c : charsList) {
-                if(isAvailable(c,i,inputtedFlight)) {
+                if(isSeatAvailable(c,i,inputtedFlight)) {
                     System.out.printf("%10s%s", c, i );
                 } else {
                     System.out.printf("%10s","NA");
@@ -156,51 +171,61 @@ public class Flights extends Main {
 
     }
 
-    public static boolean isAvailable(char c,int r,Flight inputtedFlight) {
+    public static boolean isSeatAvailable(char c,int r,Flight inputtedFlight) {
         ArrayList<Flight.Seat> seatsList = inputtedFlight.getSeatsArrayList();
         for (Flight.Seat seat: seatsList) {
             if (seat.column == c && seat.row == r && seat.available) return true;
         }
         return false;
     }
-
+    public static Flight searchByFlightNumber(int flightNumber,ArrayList<Flight> flightsList) {
+        for (Flight flight: flightsList) {
+            if (flight.flightNumber == flightNumber) {
+                return flight;
+            }
+        }
+        return null;
+    }
     public static void initializeFlights(){
         createNewFlight(1,"DMM","RUH",1,
-                new Date(2024,6,12,15, 0),
-                new Date(2024,6,12,17, 0));
+                new Date(124,6,12,15, 0),
+                new Date(124,6,12,17, 0));
         createNewFlight(2,"DMM","JED",2,
-                new Date(2024,6,16,15, 0),
-                new Date(2024,6,16,17, 0));
+                new Date(124,6,16,15, 0),
+                new Date(124,6,16,17, 0));
         createNewFlight(3,"DMM","MED",3,
-                new Date(2024,6,16,15, 0),
-                new Date(2024,6,16,17, 0));
+                new Date(124,6,16,15, 0),
+                new Date(124,6,16,17, 0));
         createNewFlight(4,"RUH","JED",4,
-                new Date(2024,6,12,15, 0),
-                new Date(2024,6,12,17, 0));
+                new Date(124,6,12,15, 0),
+                new Date(124,6,12,17, 0));
         createNewFlight(5,"RUH","DMM",5,
-                new Date(2024,6, 2,15, 0),
-                new Date(2024,6,2,17, 0));
+                new Date(124,6, 2,15, 0),
+                new Date(124,6,2,17, 0));
         createNewFlight(6,"RUH","MED",6,
-                new Date(2024,6,1,15, 0),
-                new Date(2024,6,1,17, 0));
+                new Date(124,6,1,15, 0),
+                new Date(124,6,1,17, 0));
         createNewFlight(7,"JED","MED",7,
-                new Date(2024,6,10,8, 0),
-                new Date(2024,6,10,10, 0));
+                new Date(124,6,10,8, 0),
+                new Date(124,6,10,10, 0));
         createNewFlight(8,"JED","DMM",8,
-                new Date(2024,6,13,7, 0),
-                new Date(2024,6,13,9, 0));
+                new Date(124,6,13,7, 0),
+                new Date(124,6,13,9, 0));
         createNewFlight(9,"JED","RUH",9,
-                new Date(2024,6,16,8, 0),
-                new Date(2024,6,16,10, 0));
+                new Date(124,6,16,8, 0),
+                new Date(124,6,16,10, 0));
         createNewFlight(10,"MED","JED",10,
-                new Date(2024,6,25,15, 0),
-                new Date(2024,6,25,17, 0));
+                new Date(124,6,25,15, 0),
+                new Date(124,6,25,17, 0));
         createNewFlight(11,"MED","DMM",11,
-                new Date(2024,6,4,16, 0),
-                new Date(2024,6,4,18, 0));
+                new Date(124,6,4,16, 0),
+                new Date(124,6,4,18, 0));
         createNewFlight(12,"MED","RUH",12,
-                new Date(2024,6,24,12, 0),
-                new Date(2024,6,24,14, 0));
+                new Date(124,6,24,12, 0),
+                new Date(124,6,24,14, 0));
+        createNewFlight(13,"MED","RUH",12,
+                new Date(124,6,24,15, 0),
+                new Date(124,6,24,17, 0));
 
     }
 

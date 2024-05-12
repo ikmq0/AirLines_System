@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     // We should start our program from here
@@ -30,7 +31,7 @@ public class Main {
         if (option == 1) {
             bookFlight(kb);
         } else {
-            System.out.println(CommandColors.WHITE + "Please enter your reservation number" + CommandColors.RESET);
+            displayBooking(kb);
         }
 
     }
@@ -85,13 +86,38 @@ public class Main {
                         (departureOption == 4 && (arrivalOption == 1 || arrivalOption == 2 || arrivalOption == 3))) {
                     break;
                 } else {
-                    System.out.println(CommandColors.WHITE + "Invalid option. Please enter a valid arrival city." + CommandColors.RESET);
+                    System.out.print(CommandColors.RED + "Invalid option. Please enter a valid arrival city: " + CommandColors.RESET);
                 }
             } else {
-                System.out.println(CommandColors.RED + "Invalid input. Please enter a number." + CommandColors.RESET);
+                System.out.print(CommandColors.RED + "Invalid input. Please enter a number: " + CommandColors.RESET);
                 kb.next();
             }
         }
-        System.out.println(Flights.searchForFlightsWArrivalAndDeparture(departureCity,arrivalCity));
+        ArrayList<Flights.Flight> availableFlights = Flights.searchForFlightsWArrivalAndDeparture(departureCity,arrivalCity);
+        int flightNumber;
+        Flights.Flight selectedFlight;
+        while (true) {
+            for (Flights.Flight flight: availableFlights) {
+                System.out.printf("\nFlight Number: %10s\n",flight.getFlightNumber());
+                System.out.printf("%s ==> %s\n",flight.getDepartureCity(),flight.getArrivalCity());
+                System.out.printf("%s ==> %s\n\n",flight.getDepartureDate_Time().toString().substring(0,16),flight.getArrivalDate_Time().toString().substring(0,16));
+            }
+            System.out.print("Enter the number of the flight you want: ");
+            flightNumber = kb.nextInt();
+            selectedFlight = Flights.searchByFlightNumber(flightNumber,availableFlights);
+            if (selectedFlight == null) {
+                System.out.println(CommandColors.RED + "Please enter valid flight number! " + CommandColors.RESET);
+                continue;
+            }
+            break;
+
+        }
+
+
+
+    }
+
+    public static void displayBooking(Scanner kb) {
+        
     }
 }
