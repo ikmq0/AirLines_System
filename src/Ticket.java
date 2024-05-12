@@ -2,8 +2,6 @@ public class Ticket {
     private Passenger passenger;
     private Flights.Flight flight;
     private Flights.Flight.Seat seat;
-    private int seatRow;
-    private String seatColumn;
 
     public Passenger getPassenger() {
         return passenger;
@@ -18,11 +16,11 @@ public class Ticket {
     }
 
     public int getSeatRow() {
-        return seatRow;
+        return seat.row;
     }
 
-    public String getSeatColumn() {
-        return seatColumn;
+    public char getSeatColumn() {
+        return seat.column;
     }
 
     public void setPassenger(Passenger passenger) {
@@ -38,17 +36,17 @@ public class Ticket {
     }
 
     public void setSeatRow(int seatRow) {
-        this.seatRow = seatRow;
+        this.seat.row = seatRow;
     }
 
-    public void setSeatColumn(String seatColumn) {
-        this.seatColumn = seatColumn;
+    public void setSeatColumn(char seatColumn) {
+        this.seat.column = seatColumn;
     }
     // khaled please check here and tell me if the seat number and row can be accessed from the seat class in flight class
     public String toString(){
         return "Ticket to flight "+ flight.getFlightNumber() +
                 "Passenger name is: " + passenger.getName() +
                 "with Passport number: " + passenger.getPassportNumber() +
-                "Seat row: " + seatRow + "Seat col: " + seatColumn;
+                "Seat row: " + seat.row + "Seat col: " + seat.column;
     }
 }
