@@ -79,7 +79,7 @@ public class Main {
                     System.out.println(CommandColors.WHITE + "Invalid option. Please enter a valid arrival city." + CommandColors.RESET);
                 }
             } else {
-                System.out.println(CommandColors.WHITE + "Invalid input. Please enter a number." + CommandColors.RESET);
+                System.out.println(CommandColors.RED + "Invalid input. Please enter a number." + CommandColors.RESET);
                 kb.next();
             }
         }
