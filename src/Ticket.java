@@ -1,15 +1,15 @@
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
     private String passengerFirstName;
     private String passengerLastName;
     private int passengerAge;
     private String passportNumber;
     private Flights.Flight flight;
     private Flights.Flight.Seat seat;
-
     public String getPassengerFirstName() {
         return passengerFirstName;
     }
-
     public void setPassengerFirstName(String passengerFirstName) {
         this.passengerFirstName = passengerFirstName;
     }

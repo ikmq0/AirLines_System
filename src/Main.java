@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
     // We should start our program from here
     public static void main(String[] args) {
-        Flights.initializeFlights();
         Scanner kb = new Scanner(System.in);
 
 
@@ -172,8 +171,9 @@ public class Main {
         }
         Reservations.reservationArrayList.add(currentReservation);
         System.out.println(CommandColors.GREEN +"\nThanks for using our AirLines System!" + CommandColors.RESET);
-        System.out.printf(CommandColors.GREEN + "Your Reservation Number:"+ CommandColors.BLUE +" %10s" + CommandColors.RESET,currentReservation.getReservationNumber());
-
+        System.out.printf(CommandColors.GREEN + "Your Reservation Number:"+ CommandColors.BLUE +" %10s\n\n" + CommandColors.RESET,currentReservation.getReservationNumber());
+        Flights.writeInFile("flights.dat");
+        Reservations.writeInFile("reservations.dat");
 
 
     }
@@ -184,6 +184,7 @@ public class Main {
             long reservationNumber = kb.nextLong();
             Reservations.Reservation reservation = Reservations.SearchForReservation(reservationNumber);
             if (reservation != null) {
+                System.out.println("___________________________________");
                 System.out.printf(CommandColors.GREEN + "Your Reservation Number:"+ CommandColors.BLUE +" %10s\n" + CommandColors.RESET,reservation.getReservationNumber());
                 for (int i = 1; i <= reservation.getTicketsList().size();i++) {
                     Ticket ticket = reservation.getTicketsList().get(i-1);
@@ -193,7 +194,8 @@ public class Main {
                     System.out.printf("Passport Number: %-5s\n",ticket.getPassportNumber());
                     System.out.printf("Flight Number: %-5s\n",ticket.getFlight().getFlightNumber());
                     System.out.printf("Gate Number: %-5s\n",ticket.getFlight().getGateNumber());
-                    System.out.printf("Seat: %-5s\n",ticket.getSeat().getColumn()+ticket.getSeat().getRow());
+                    System.out.printf("Seat: %s%s\n",ticket.getSeat().getColumn(),ticket.getSeat().getRow());
+                    System.out.println("___________________________________");
                 }
 
             } else {

@@ -1,11 +1,38 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Reservations extends Main {
-    public static ArrayList<Reservation> reservationArrayList = new ArrayList<>();
+    public static ArrayList<Reservation> reservationArrayList = readFile("reservations.dat");
     static Random random = new Random();
+    public static void writeInFile(String fileExtension){
+        try {
+            FileOutputStream location = new FileOutputStream(fileExtension);
+            ObjectOutputStream writer = new ObjectOutputStream(location);
+            writer.writeObject(reservationArrayList);
+            writer.close();
+            location.close();
+        } catch (IOException ioe) {
+            System.out.println("Error saving the file !! ");
+        }
+    }
+    static ArrayList<Reservation> list = null;
+    public static ArrayList<Reservation> readFile(String fileExtension){
+        try {
+            FileInputStream location = new FileInputStream(fileExtension);
+            ObjectInputStream reader = new ObjectInputStream(location);
+            list = (ArrayList<Reservation>) reader.readObject();
+            reader.close();
+            return list;
+        } catch (IOException ioe) {
+            System.out.println("Error reading the file !! ");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found !! ");
 
-    public static class Reservation extends Reservations {
+        }
+        return null;
+    }
+    public static class Reservation extends Reservations implements Serializable {
         ArrayList<Ticket> ticketsList;
         private long reservationNumber;
 

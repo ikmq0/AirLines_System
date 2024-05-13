@@ -1,11 +1,40 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Date;
 
 public class Flights extends Main {
-    public static ArrayList<Flight> flightsArrayList = new ArrayList<>(); // This list to store all flights:
+    public static ArrayList<Flight>  flightsArrayList = readFile("flights.dat");// This list to store all flights:
 
-    public static class Flight extends Flights {
+    public static void writeInFile(String fileExtension){
+        try {
+            FileOutputStream location = new FileOutputStream(fileExtension);
+            ObjectOutputStream writer = new ObjectOutputStream(location);
+            writer.writeObject(flightsArrayList);
+            writer.close();
+            location.close();
+        } catch (IOException ioe) {
+            System.out.println("Error saving the file !! ");
+        }
+    }
+    static ArrayList<Flight> list = null;
+    public static ArrayList<Flight> readFile(String fileExtension){
+        try {
+            FileInputStream location = new FileInputStream(fileExtension);
+            ObjectInputStream reader = new ObjectInputStream(location);
+            list = (ArrayList<Flight>) reader.readObject();
+            reader.close();
+            return list;
+        } catch (IOException ioe) {
+            System.out.println("Error reading the file !! ");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found !! ");
+
+        }
+        return null;
+    }
+
+    public static class Flight extends Flights implements Serializable {
         ArrayList<Seat> seatsArrayList; // This will be an array to store seats for each flight
         private int flightNumber;
         private String departureCity;
@@ -110,7 +139,7 @@ public class Flights extends Main {
                     '}';
         }
 
-        public static class Seat{
+        public static class Seat implements Serializable{
             private int row;
             private char column;
             private boolean available;
@@ -180,9 +209,13 @@ public class Flights extends Main {
                 if(Objects.requireNonNull(SearchForSeatByColumn(c, i, inputtedFlight)).isAvailable()) {
                     if (c == 'A' || c=='C'){
                         System.out.printf("%10s%s", c, i );
-                    } else {System.out.printf("%7s%s", c, i );}
-                } else {
+                    } else {
+                        System.out.printf("%7s%s", c, i );
+                    }
+                } else if(c == 'A' || c=='C') {
                     System.out.printf("%10s%s","N","A");
+                } else {
+                    System.out.printf("%7s%s", "N","A");
                 }
             }
             System.out.println();
