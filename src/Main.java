@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
 
-
         while (true) {
             System.out.println(CommandColors.GREEN + "Welcome to AirLINE Reservations System " + CommandColors.RESET);
             System.out.println(CommandColors.GREEN + "Lets Book a flight together!! " + CommandColors.RESET);
@@ -16,7 +15,6 @@ public class Main {
                 System.out.println(CommandColors.WHITE + "\n1. Book Now" + CommandColors.RESET);
                 System.out.println(CommandColors.WHITE + "2. Display Booking" + CommandColors.RESET);
                 System.out.print(CommandColors.WHITE + "Select an option: " + CommandColors.RESET);
-
                 if (kb.hasNextInt()) {
                     option = kb.nextInt();
                     if (option == 1 || option == 2) {
@@ -119,12 +117,17 @@ public class Main {
         int numberOfPassenger;
         while (true) {
             System.out.print("Enter the number of passengers (0< ): ");
-            numberOfPassenger = kb.nextInt();
-            if(numberOfPassenger > 0 && numberOfPassenger <= 20) {
-                break;
+            if (kb.hasNextInt()) {
+                numberOfPassenger = kb.nextInt();
+                if(numberOfPassenger > 0 && numberOfPassenger <= 20) {
+                    break;
+                } else {
+                    System.out.println(CommandColors.RED + "Invalid input, make sure it's between 1 and 20" + CommandColors.RESET);
+                }
             } else {
-                System.out.println(CommandColors.RED + "Invalid input, make sure it's between 1 and 20" + CommandColors.RESET);
+                System.out.println(CommandColors.RED + "Invalid input, enter a number." + CommandColors.RESET);
             }
+
         }
         Reservations.Reservation currentReservation = Reservations.createNewReservation();
 
@@ -137,12 +140,17 @@ public class Main {
             int passengerAge;
             while(true){
                 System.out.printf("Passenger %s Age: ",i);
-                passengerAge = kb.nextInt();
-                if (passengerAge >=18 && passengerAge < 90) {
-                    break;
+                if(kb.hasNextInt()) {
+                    passengerAge = kb.nextInt();
+                    if (passengerAge >=18 && passengerAge < 90) {
+                        break;
+                    } else {
+                        System.out.println(CommandColors.RED + "Invalid input. ensure that age between 18 and 90" + CommandColors.RESET);
+                    }
                 } else {
-                    System.out.println(CommandColors.RED + "Invalid input. ensure that age between 18 and 90" + CommandColors.RESET);
+                    System.out.println(CommandColors.RED + "Invalid input, enter an integer." + CommandColors.RESET);
                 }
+
             }
             System.out.printf("Passenger %s Passport Number: ",i);
             String passengerPass = kb.next();
@@ -154,15 +162,23 @@ public class Main {
             while (true){
                 System.out.print("Select your seat: ");
                 selectedSeat = kb.next();
-                char column = selectedSeat.charAt(0);
-                int row = Integer.parseInt(selectedSeat.substring(1));
-                classSeat = Flights.SearchForSeatByColumn(column,row,selectedFlight);
-                if(classSeat.isAvailable()) {
-                     Flights.makeSeatUnavailable(column,row,selectedFlight.getFlightNumber());
-                     break;
+                ArrayList<Character> characters = new ArrayList<Character>();
+                characters.add('A'); characters.add('B'); characters.add('C'); characters.add('D');
+                boolean specialCondition = selectedSeat.length() == 2 && characters.contains(selectedSeat.charAt(0)) && Integer.parseInt(selectedSeat.substring(1,2)) <=4 && Integer.parseInt(selectedSeat.substring(1,2)) >=1;
+                if (specialCondition) {
+                    char column = selectedSeat.charAt(0);
+                    int row = Integer.parseInt(selectedSeat.substring(1));
+                    classSeat = Flights.SearchForSeatByColumn(column,row,selectedFlight);
+                    if(classSeat.isAvailable()) {
+                        Flights.makeSeatUnavailable(column,row,selectedFlight.getFlightNumber());
+                        break;
+                    } else {
+                        System.out.println(CommandColors.RED + "Invalid input. Enter available seat" + CommandColors.RESET);
+                    }
                 } else {
-                    System.out.println(CommandColors.RED + "Invalid input. Enter available seat" + CommandColors.RESET);
+                    System.out.println(CommandColors.RED + "Invalid input. Check your input please" + CommandColors.RESET);
                 }
+
 
             }
 
@@ -203,6 +219,7 @@ public class Main {
             }
         } else {
             System.out.println(CommandColors.RED + "Invalid input. Please enter a valid number" + CommandColors.RESET);
+
         }
     }
 }
