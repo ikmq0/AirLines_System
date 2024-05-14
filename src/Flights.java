@@ -139,7 +139,7 @@ public class Flights extends Main {
                     '}';
         }
 
-        public static class Seat implements Serializable{
+        public static class Seat implements Serializable{ //Seat Class
             private int row;
             private char column;
             private boolean available;
@@ -189,7 +189,7 @@ public class Flights extends Main {
 
     public static void createNewFlight(int flightNumber, String departureCity, String arrivalCity, int gateNumber,Date departureDate_Time,Date arrivalDate_Time){
         flightsArrayList.add(new Flight(flightNumber,departureCity,arrivalCity,gateNumber,departureDate_Time,arrivalDate_Time)) ;
-    }
+    } // Function to create flights directly
 
     public static ArrayList<Flight> searchForFlightsWArrivalAndDeparture(String departureCity,String arrivalCity) {
         ArrayList<Flight> flights = new ArrayList<>();

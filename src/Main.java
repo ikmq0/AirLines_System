@@ -8,8 +8,8 @@ public class Main {
         Scanner kb = new Scanner(System.in);
 
         while (true) {
-            System.out.println(CommandColors.GREEN + "Welcome to AirLINE Reservations System " + CommandColors.RESET);
-            System.out.println(CommandColors.GREEN + "Lets Book a flight together!! " + CommandColors.RESET);
+            System.out.println(CommandColors.PURPLE + "Welcome to AirLINE Reservations System " + CommandColors.RESET);
+            System.out.println(CommandColors.PURPLE + "Lets Book a flight together!! " + CommandColors.RESET);
             int option = 0;
             while (true) {
                 System.out.println(CommandColors.WHITE + "\n1. Book Now" + CommandColors.RESET);
@@ -149,6 +149,7 @@ public class Main {
                     }
                 } else {
                     System.out.println(CommandColors.RED + "Invalid input, enter an integer." + CommandColors.RESET);
+                    kb.next();
                 }
 
             }
