@@ -220,7 +220,6 @@ public class Main {
             }
         } else {
             System.out.println(CommandColors.RED + "Invalid input. Please enter a valid number" + CommandColors.RESET);
-
         }
     }
 }
